@@ -17,14 +17,13 @@ int main() {
         int cur_pos = q.front().first;
         int cur_time = q.front().second;
 
-        int t = cur_pos;
-        while(t*2 <= 100000) {
+        if(cur_pos == K) {
+            cout << cur_time;
+            return 0;
+        }
 
-            if(t*2 == K) {
-                cout << cur_time;
-                return 0;
-            }
-            
+        int t = cur_pos;
+        while(t != 0 && t*2 <= 100000) {
             if(!board[t*2]) {
                 q.push({t*2, cur_time});
                 board[t*2] = 1;
@@ -32,22 +31,16 @@ int main() {
             t *= 2;
         } // while
         
-        if(cur_pos+1 == K || cur_pos-1 == K) {
-            cout << cur_time+1;
-            return 0;
+        if(cur_pos-1 >= 0 && !board[cur_pos-1]) {
+            q.push({cur_pos-1, cur_time+1});
+            board[cur_pos-1] = 1;
         }
 
-        if(!board[cur_pos+1]) {
+        if(cur_pos+1 <= 100000 && !board[cur_pos+1]) {
             q.push({cur_pos+1, cur_time+1});
             board[cur_pos+1] = 1;
         }
         
-        if(!board[cur_pos-1]) {
-            q.push({cur_pos-1, cur_time+1});
-            board[cur_pos-1] = 1;
-        }
-        
-        ans = cur_time + 1;
         q.pop();
     } // while
 
