@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/sangwoo-park/bojicpc/16234'
+relocations:     []
+...
